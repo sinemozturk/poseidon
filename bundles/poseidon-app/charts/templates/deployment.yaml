@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poseidon-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: poseidon-app
+  template:
+    metadata:
+      labels:
+        app: poseidon-app
+    spec:
+      containers:  
+        - name: poseidon-app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 80
+          env:
+            - name: PORT
+              value: "80"
+          # health checks 
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 5  # Wait 5s before first check
+            periodSeconds: 10       # Check every 10s
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 2  # Faster initial check
+            periodSeconds: 5        # Check every 5s

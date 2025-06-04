@@ -1,0 +1,5 @@
+apiVersion: v2
+name: poseidon-app
+description: A minimal Helm chart for the poseidon-app
+version: 0.1.0
+appVersion: "latest"
