@@ -2,7 +2,7 @@ bundle_name: poseidon-bundle
 size: 15M
 application:
   artifact_size: ""
-  name: Commmodity
+  name: poseidon-app
   description: Minimal poseidon application
   version: 0.1.0
   services:
