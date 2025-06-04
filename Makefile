@@ -46,7 +46,7 @@ appbundle:
 	@echo "roles_path = roles" >> dist/$(APP_NAME)/ansible.cfg
 	@echo "playbook_dir = actions" >> dist/$(APP_NAME)/ansible.cfg
 	@echo "Creating final tarball $(APP_NAME).tar.gz..."
-	@cd dist/${APP_NAME} && find . -type f -o -type d | tar czf ../$(APP_NAME).tar.gz -T -
+	@cd dist && tar -czf $(APP_NAME).tar.gz $(APP_NAME)
 	@echo "Appbundle created at dist/$(APP_NAME).tar.gz"
 
 clean:
