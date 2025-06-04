@@ -38,15 +38,12 @@ appbundle:
 	@helm package bundles/${APP_NAME}/charts
 	@mkdir -p dist/$(APP_NAME)/charts
 	@mv *.tgz dist/$(APP_NAME)/charts/
-	@echo "Copying static files..."
-	@mkdir -p dist/$(APP_NAME)/static
-	@cp -r static/ dist/$(APP_NAME)/static/
 	@echo "Generating ansible.cfg file..."
 	@echo "[defaults]" > dist/$(APP_NAME)/ansible.cfg
 	@echo "roles_path = roles" >> dist/$(APP_NAME)/ansible.cfg
 	@echo "playbook_dir = actions" >> dist/$(APP_NAME)/ansible.cfg
 	@echo "Creating final tarball $(APP_NAME).tar.gz..."
-	@cd dist && tar -czf $(APP_NAME).tar.gz $(APP_NAME)
+	@cd dist/${APP_NAME} && find . -type f -name '*.tgz' -o -name '*.tar.gz' -o -name '*.yml' -o -name 'ansible.cfg' | tar czf ../$(APP_NAME).tar.gz -T -
 	@echo "Appbundle created at dist/$(APP_NAME).tar.gz"
 
 clean:

@@ -4,9 +4,10 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy static site files to nginx web root
-COPY index.html /usr/share/nginx/html/
-COPY style.css /usr/share/nginx/html/
-COPY static/ /usr/share/nginx/html/static/
+RUN mkdir -p /usr/share/nginx/html/poseidon-app
+COPY index.html /usr/share/nginx/html/poseidon-app/
+COPY style.css /usr/share/nginx/html/poseidon-app/
+COPY static/ /usr/share/nginx/html/poseidon-app/static/
 
 EXPOSE 80
 
